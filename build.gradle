@@ -1,0 +1,41 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.0'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id "com.gorylenko.gradle-git-properties" version "2.4.1"
+}
+
+group = 'kr.co.wisenut'
+version = '0.1.1'
+sourceCompatibility = '17'
+
+ext {
+	/* version update 2023.05.26 */
+	SpringBootVersion = '3.1.0'
+	CommonsCliVersion = '1.5.0'
+
+	HibernateVersion = '8.0.0.Final'
+	MySQLVersion = '8.0.33'
+	JunitVersion = '5.9.2'
+	AssertjVersion = '3.24.2'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-websocket:' +SpringBootVersion
+	implementation 'commons-cli:commons-cli:' +CommonsCliVersion
+
+	compileOnly 'org.springframework.boot:spring-boot-starter-actuator:' +SpringBootVersion
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:' +SpringBootVersion
+	testImplementation 'org.assertj:assertj-core:' +AssertjVersion
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:' +JunitVersion
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:' +JunitVersion
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
